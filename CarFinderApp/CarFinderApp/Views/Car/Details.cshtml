@@ -1,0 +1,118 @@
+﻿@model CarFinderApp.Models.CarViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    a{
+        color:#6B6363
+    }
+    b{
+        color:#6B6363
+    }
+    .nav-pills > li.active > a,
+        .nav-pills > li.active > a:hover,
+        .nav-pills > li.active > a:focus{
+            color: white;
+            background-color: #ff0000;  
+        } 
+</style>
+<div class="container well" style="background:#FFF3F3;border:none">
+    
+
+    <img class="img-responsive well" src="@Model.Image" style="margin:0 auto; background:#ff0000; border-width:.5em; border-color:black"/>
+    <hr />
+    <br />
+    <h2 style="text-align:center">@Html.DisplayFor(model => model.Car.make) @Html.DisplayFor(model => model.Car.model_name)</h2>
+    <div>
+        <hr />
+        @* ------------Tabs------------ *@
+        <ul class="nav nav-pills nav-justified" role="tablist">
+            <li role="presentation" class="active">
+            <a href="#details" aria-controls="home" role="tab" data-toggle="tab" >Details</a> </li>
+            @{foreach (var result in Model.Recalls.Results)
+            {
+
+                <li role="presentation"><a href="#@result.NHTSACampaignNumber" aria-controls="profile" role="tab" data-toggle="tab" style="color:white">Recall</a></li>
+
+            }}
+        </ul>
+        @* ------------End of Tabs------------ *@
+
+        @* ------------Tab Content------------ *@
+        <div class="tab-content well" style="background-color:#2a2626; border:none">
+            <div role="tabpanel" class="tab-pane active" id="details">
+                
+                    @*<dt>
+                        @Html.DisplayNameFor(model => model.Car.make)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Car.make)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Car.model_name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Car.model_name)
+                    </dd>*@
+
+                <div class="row">
+                    <div class="col-md-6" style="text-align:center">
+                        <h3> <span style="color:#6B6363">@Html.DisplayNameFor(model => model.Car.model_trim)</span>/@Html.DisplayFor(model => model.Car.model_trim)</h3>
+
+                        <h3> <span style="color:#6B6363">@Html.DisplayNameFor(model => model.Car.model_year)</span>/@Html.DisplayFor(model => model.Car.model_year)</h3>
+
+                        <h3> <span style="color:#6B6363">@Html.DisplayNameFor(model => model.Car.body_style)</span>/@Html.DisplayFor(model => model.Car.body_style)</h3>
+
+                        <h3> <span style="color:#6B6363">@Html.DisplayNameFor(model => model.Car.engine_cc)</span>/@Html.DisplayFor(model => model.Car.engine_cc)</h3>
+
+                        <h3> <span style="color:#6B6363">@Html.DisplayNameFor(model => model.Car.engine_type)</span>/@Html.DisplayFor(model => model.Car.engine_type)</h3>
+                    </div>
+                    <div class="col-md-6" style="text-align:center">
+                        <h3> <span style="color:#6B6363">@Html.DisplayNameFor(model => model.Car.seats)</span>/@Html.DisplayFor(model => model.Car.seats)</h3>
+
+                        <h3> <span style="color:#6B6363">@Html.DisplayNameFor(model => model.Car.doors)</span>/@Html.DisplayFor(model => model.Car.doors)</h3>
+
+                        <h3> <span style="color:#6B6363">@Html.DisplayNameFor(model => model.Car.drive_type)</span>/@Html.DisplayFor(model => model.Car.drive_type)</h3>
+
+                        <h3> <span style="color:#6B6363">@Html.DisplayNameFor(model => model.Car.lkm_mixed)</span>/@Html.DisplayFor(model => model.Car.lkm_mixed)</h3>
+                    </div>
+                </div> 
+                
+
+                
+
+            </div>
+            @{foreach (var result in Model.Recalls.Results)
+            {
+                <div role="tabpanel" class="tab-pane" id="@result.NHTSACampaignNumber">
+                    <h6><span><b>NHTSACampaignNumber:</b></span>@result.NHTSACampaignNumber</h6>
+                    <h6><span><b>NHTSAActionNumber:</b></span>@result.NHTSAActionNumber</h6>
+                    <h6><span><b>Summary:</b></span>@result.Summary</h6>
+                    <h6><span><b>Component:</b></span>@result.Component</h6>
+                    <h6><span><b>Consequence:</b></span>@result.Conequence</h6>
+                    <h6><span><b>Remedy:</b></span>@result.Remedy</h6>
+                </div>
+            }
+
+            }
+        </div>
+        @* ------------End of Tab Content------------ *@
+    </div>
+
+    <p style="color:#6B6363">
+
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>
+@section Scripts{
+    <script>
+    $('#myTabs a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+    })
+    </script>
+}

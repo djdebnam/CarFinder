@@ -1,0 +1,345 @@
+﻿@model IEnumerable<CarFinderApp.Models.Car>
+<style>
+    html, body
+    {
+        margin: 0;
+        padding: 0;
+        color:black;
+    }
+    .dataTables_wrapper,.dataTables_info{
+        color:black;
+    }
+    tfoot{
+        display:table-header-group
+    }
+     a{
+        color:#6B6363
+    }
+     .modal-content {
+         width: 50% !important;
+         margin: 5em auto !important;
+     }
+</style>
+<link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="#page-top">
+                <i class="fa fa-play-circle"></i>  <span class="light">Car</span> Finder
+            </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+            <ul class="nav navbar-nav">
+                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#about">About</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#search">Try Now!</a>
+                </li>
+                @*<li>
+                    <a class="page-scroll" href="#contact">Contact</a>
+                </li>*@
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<header class="intro" style="margin:0;padding:0;">
+    <div class="intro-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h1 class="brand-heading">Car Finder</h1>
+                    @*<p class="intro-text">A free, responsive, one page Bootstrap theme.<br>Created by Start Bootstrap.</p>*@
+                    <a href="#about" class="btn btn-circle page-scroll">
+                        <i class="fa fa-angle-double-down animated"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section id="about" class="container content-section text-center " >
+    <div class="row well" style="background-color:transparent;border-color:#c30202">
+        <div class="col-lg-8 col-lg-offset-2">
+            <h2 style="color:#c30202">About Car Finder</h2>
+            <p>Car Finder is responsive car finding app that makes searching for a vehicle simple and effective.</p>
+            <p>To get started, simply select a year from the dropdown list. From there, narrow down your search to find vehicles that match your criteria.</p>
+
+        </div>
+    </div>
+</section>
+<section id="search" class="content-section text-center" style="padding-bottom:5em">
+    <h1 style="font-size:4em">Try It Out!</h1>
+    <div class="container well" style="background-color:#c30202;border-color:#000;border-width:.5em">
+        <div class="row">
+            @*<h1 style="color:white;font-size:4em">Try It Out!</h1>*@
+            <div class="col-md-12" style="text-align:center">
+                <form method="post" action="@Url.Action("Index")">
+
+                    @Html.DropDownList("year")
+
+                    <button type="submit">Select</button>
+
+                </form>
+            </div>
+
+        </div>
+
+
+        <table id="myTable" class="table stripe responsive cell-border compact">
+            <thead>
+                <tr>
+                    <th style="text-align:center;color:white">
+                        @Html.DisplayNameFor(model => model.make)
+                    </th>
+                    <th style="text-align:center;color:white">
+                        @Html.DisplayNameFor(model => model.model_name)
+                    </th>
+                    <th style="text-align:center;color:white">
+                        @Html.DisplayNameFor(model => model.model_trim)
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.model_year)
+                        </th>*@
+                    <th style="text-align:center;color:white">
+                        @Html.DisplayNameFor(model => model.body_style)
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.engine_cc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.engine_type)
+                        </th>*@
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.seats)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.doors)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.drive_type)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.lkm_hwy)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.lkm_city)
+                        </th>*@
+                    <th>
+
+                    </th>
+
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th style="text-align:center">
+                        @Html.DisplayNameFor(model => model.make)
+                    </th>
+                    <th style="text-align:center">
+                        @Html.DisplayNameFor(model => model.model_name)
+                    </th>
+                    <th style="text-align:center">
+                        @Html.DisplayNameFor(model => model.model_trim)
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.model_year)
+                        </th>*@
+                    <th style="text-align:center">
+                        @Html.DisplayNameFor(model => model.body_style)
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.engine_cc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.engine_type)
+                        </th>*@
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.seats)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.doors)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.drive_type)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.lkm_hwy)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.lkm_city)
+                        </th>*@
+
+                    <th></th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td style="color:black; text-align:center">
+                            @Html.DisplayFor(modelItem => item.make)
+                        </td>
+                        <td style="color:black; text-align:center">
+                            @Html.DisplayFor(modelItem => item.model_name)
+                        </td>
+                        <td style="color:black; text-align:center">
+                            @Html.DisplayFor(modelItem => item.model_trim)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.model_year)
+                            </td>*@
+                        <td style="color:black; text-align:center">
+                            @Html.DisplayFor(modelItem => item.body_style)
+                        </td>
+                        @*<td style="color:black">
+                                @Html.DisplayFor(modelItem => item.engine_cc)
+                            </td>
+                            <td style="color:black">
+                                @Html.DisplayFor(modelItem => item.engine_type)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.seats)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.doors)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.drive_type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.lkm_hwy)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.lkm_city)
+                            </td>*@
+                        <td style="color:black; text-align:center">
+                            @Html.ActionLink("View", "ViewData", new { id = item.id }, new { @class = "modal-link btn btn-primary" })
+                            @*<a href="@Url.Action("ViewData","Car", new { id = item.id })" style="text-align:center"><span class="btn btn-sm" style="background-color:#285e8e; color:white">View</span></a>*@
+                        </td>
+                    </tr>
+    @*@Html.ActionLink("Lyubomir ", "ViewLyubomir", "Home",
+null, new { @class = "modal-link btn btn-success" })*@
+                }
+            </tbody>
+        </table>
+        <div class="modal fade" id="modal-container" tabindex="-1" role="dialog" aria-hidden="true" >
+            
+            <div class="modal-body">
+                <div class="modal-content">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*<section id="contact" class="container content-section text-center">
+    <hr />
+    <div class="row">
+        
+        <div class="col-lg-8 col-lg-offset-2" style="color:white">
+            <h1>Contact Me</h1>
+            
+           
+            <ul class="list-inline banner-social-buttons">
+                
+                <li style ="color:#285e8e">
+                    <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                </li >
+                <li>
+                    <a href="https://plus.google.com/+Startbootstrap/posts" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+    <hr />
+</section>*@
+ <!-- Map Section -->
+@*<div id="map"></div>*@
+
+@section Scripts {
+   
+<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Setup - add a text input to each footer cell
+            $('#myTable tfoot th').each(function () {
+                var title = $('#myTable thead th').eq($(this).index()).text();
+                $(this).html('<input type="text" style="text-align:center" placeholder="Search" />');
+            });
+
+            // DataTable
+            var table = $('#myTable').DataTable({
+
+                paging: true,
+                searching: true,
+                ordering: true,
+                lengthChange: false,
+
+                "dom": '<"top"l><"clearfix">rt<"bottom"p>',
+                
+                "autoWidth": false,
+
+                "columnDefs": [
+                    { "orderable": false, "targets": 4 },
+                    //{"footer": false, "targets": 4},
+                    
+                ]
+                
+            });
+
+            // Apply the search
+            table.columns().every(function () {
+                var that = this;
+
+                $('input', this.footer()).on('keyup change', function () {
+                    that
+                        .search(this.value)
+                        .draw();
+                });
+            });
+        });
+</script>
+<script type="text/javascript">
+    $(function () {
+        // Initialize numeric spinner input boxes
+        //$(".numeric-spinner").spinedit();
+        // Initialize modal dialog
+        // attach modal-container bootstrap attributes to links with .modal-link class.
+        // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
+        $('body').on('click', '.modal-link', function (e) {
+            e.preventDefault();
+            $(this).attr('data-target', '#modal-container');
+            $(this).attr('data-toggle', 'modal');
+        });
+        // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
+        $('body').on('click', '.modal-close-btn', function () {
+            $('#modal-container').modal('hide');
+        });
+        //clear modal cache, so that new content can be loaded
+        $('#modal-container').on('hidden.bs.modal', function () {
+            $(this).removeData('bs.modal');
+        });
+        $('#CancelModal').on('click', function () {
+            return false;
+        });
+    });
+</script>
+
+
+   
+        }

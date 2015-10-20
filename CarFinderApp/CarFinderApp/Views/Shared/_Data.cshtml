@@ -1,0 +1,107 @@
+﻿@model CarFinderApp.Models.CarViewModel
+
+
+<style>
+    a, a.active {
+        color: white;
+    }
+
+    b {
+        color: #c30202;
+    }
+
+    .nav-pills > li.active > a,
+    .nav-pills > li.active > a:hover,
+    .nav-pills > li.active > a:focus {
+        color: white;
+        background-color: #c30202;
+    }
+</style>
+
+<div class="modal-body">
+    <div class="container well" style="background:#ffffff;border:none">
+        <button type="button" class="modal-close-btn " style="float:right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+        <img class="img-responsive well" src="@Model.Image" style="margin:0 auto;  background:black; border:none" />
+        <hr />
+        <br />
+        <h2 style="text-align:center">@Html.DisplayFor(model => model.Car.make) @Html.DisplayFor(model => model.Car.model_name)</h2>
+        <div>
+            <hr />
+            <div class="row well" style="background-color:#FFF3F3; border-width:.25em; border-color:black">
+                <div class="col-md-6" style="text-align:center">
+                    <h3> <span style="color:#c30202">@Html.DisplayNameFor(model => model.Car.model_trim)</span>/@Html.DisplayFor(model => model.Car.model_trim)</h3>
+
+                    <h3> <span style="color:#c30202">@Html.DisplayNameFor(model => model.Car.model_year)</span>/@Html.DisplayFor(model => model.Car.model_year)</h3>
+
+                    <h3> <span style="color:#c30202">@Html.DisplayNameFor(model => model.Car.body_style)</span>/@Html.DisplayFor(model => model.Car.body_style)</h3>
+
+                    <h3> <span style="color:#c30202">@Html.DisplayNameFor(model => model.Car.engine_cc)</span>/@Html.DisplayFor(model => model.Car.engine_cc)</h3>
+
+                    <h3> <span style="color:#c30202">@Html.DisplayNameFor(model => model.Car.engine_type)</span>/@Html.DisplayFor(model => model.Car.engine_type)</h3>
+                </div>
+                <div class="col-md-6" style="text-align:center">
+                    <h3> <span style="color:#c30202">@Html.DisplayNameFor(model => model.Car.seats)</span>/@Html.DisplayFor(model => model.Car.seats)</h3>
+
+                    <h3> <span style="color:#c30202">@Html.DisplayNameFor(model => model.Car.doors)</span>/@Html.DisplayFor(model => model.Car.doors)</h3>
+
+                    <h3> <span style="color:#c30202">@Html.DisplayNameFor(model => model.Car.drive_type)</span>/@Html.DisplayFor(model => model.Car.drive_type)</h3>
+
+                    <h3> <span style="color:#c30202">@Html.DisplayNameFor(model => model.Car.lkm_mixed)</span>/@Html.DisplayFor(model => model.Car.lkm_mixed)</h3>
+                </div>
+            </div>
+        </div>
+       
+        <div class="accordion" id="recalls">
+            <div class="accordion-group" >
+                
+                @{
+                    var x = 1;
+                    
+                    foreach (var result in Model.Recalls.Results)
+                {
+                    var num = x++;
+                      
+                    <div class="accrodion-heading btn btn-block" style="background-color:#c30202;color:white;min-width:100%;border-bottom-width: .2em;border-color: black;">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="recalls" href="#@result.NHTSACampaignNumber">
+                            Recall #@num
+                        </a>
+                    </div>
+
+
+    <div id="@result.NHTSACampaignNumber" class="accordion-body collapse" style="border-width:.25em;border-color:black;background-color:#FFF3F3">
+        <div class="accordion-inner">
+            <br />
+            <h6><span><b>NHTSACampaignNumber:</b></span>@result.NHTSACampaignNumber</h6>
+            <h6><span><b>NHTSAActionNumber:</b></span>@result.NHTSAActionNumber</h6>
+            <h6><span><b>Summary:</b></span>@result.Summary</h6>
+            <h6><span><b>Component:</b></span>@result.Component</h6>
+            <h6><span><b>Consequence:</b></span>@result.Conequence</h6>
+            <h6><span><b>Remedy:</b></span>@result.Remedy</h6>
+                <br />
+        </div>
+    </div>
+                }}
+            </div>
+        </div>
+    </div>      
+</div>
+
+   
+    @section Scripts{
+        <script>
+            $('#myTabs a').click(function (e) {
+                e.preventDefault()
+                $(this).tab('show')
+            })
+        </script>
+    }
+    
+
+<script type="text/javascript">
+    $(function () {
+        $('#approve-btn').click(function () {
+            $('#modal-container').modal('hide');
+        });
+    });
+</script>
